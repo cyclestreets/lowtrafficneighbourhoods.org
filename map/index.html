@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>LTNs and modal filters map</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-title" content="LTNs and modal filters map" />
+	<link rel="apple-touch-icon" sizes="57x57" href="/images/apple-touch-icon-57x57.png">
+	
+	<link rel="stylesheet" href="/css/fonts.css" type="text/css" />
+	
+	<link rel="stylesheet" href="/js/lib/mapbox-gl/dist/mapbox-gl.css" />
+	<script src="/js/lib/mapbox-gl/dist/mapbox-gl.js"></script>
+	
+	<script src="/js/lib/jquery/dist/jquery.min.js"></script>
+	
+	<script src="/js/lib/jquery-ui-dist/jquery-ui.min.js"></script>
+	
+	<script src="/js/lib/@benmajor/jquery-touch-events/src/jquery.mobile-events.min.js"></script>
+	
+	<script src="/js/lib/@hughsk/fulltilt/dist/fulltilt.min.js"></script>
+	
+	<script src="/js/lib/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.js"></script>
+	<link rel="stylesheet" href="/js/lib/@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css" />
+	
+	<script src="/js/lib/js-cookie/src/js.cookie.js"></script>
+	
+	<!-- Vex dialogs; see: https://github.hubspot.com/vex/ -->
+	<script src="/js/lib/vex-js/dist/js/vex.combined.min.js"></script>
+	<link rel="stylesheet" href="/js/lib/vex-js/dist/css/vex.css" />
+	<link rel="stylesheet" href="/js/lib/vex-js/dist/css/vex-theme-plain.css" />
+	
+	<!-- GeoJSON parser for flat JSON; see: https://www.npmjs.com/package/geojson -->
+	<script src="/js/lib/geojson/geojson.min.js"></script>
+	
+	<!-- GeoJSON extent library; see: https://github.com/mapbox/geojson-extent -->
+	<script src="/js/lib/@mapbox/geojson-extent/geojson-extent.js"></script>
+	
+	<!-- OSM to GeoJSON library -->
+	<script src="/lib/osm2geo.js"></script>
+	
+	<!-- KML/etc. to GeoJSON library; see: https://github.com/mapbox/togeojson -->
+	<script src="/js/lib/Mapboxgljs.LayerViewer/lib/togeojson/togeojson.min.js"></script>
+	
+	<!-- LayerViewer library, providing the application logic -->
+	<script src="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.js?220605"></script>
+	<link rel="stylesheet" type="text/css" href="/js/lib/Mapboxgljs.LayerViewer/src/layerviewer.css?210627" />
+	<script src="/js/lib/Mapboxgljs.LayerViewer/lib/geocoder.js"></script>
+	
+	<!-- Application and its config, implementing the LayerViewer library -->
+	<script src="/.config.js"></script>
+	<script src="/js/lowtrafficneighbourhoods.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/style.css" />
+	<script>
+		$(function() {
+			lowtrafficneighbourhoods.initialise (config);
+		});
+	</script>
+<body>
+
+	<div id="globalsites">
+		<p>CycleStreets network:</p>
+		<ul>
+			<li class="cyclestreets"><a href="https://www.cyclestreets.net/" title="Cycle journey planner">Cycle journey planner</a></li>
+			<li class="widenmypath"><a href="https://www.widenmypath.com/" title="Space for walking and cycling under COVID-19">Widen My Path</a></li>
+			<li class="streetfocus"><a href="https://www.streetfocus.uk/" title="Planning applications UK-wide">StreetFocus</a></li>
+			<li class="bikedata"><a href="https://bikedata.cyclestreets.net/" title="Data for cycle campaigning">Bikedata</a></li>
+			<li class="lowtrafficneighbourhoods selected"><a href="https://www.lowtrafficneighbourhoods.org/" title="Low-Traffic Neighbourhoods">LTNs</a></li>
+			<li class="cyclescape"><a href="https://www.cyclescape.org/" title="Campaign toolkit">Cyclescape</a></li>
+			<li class="blog"><a href="https://www.cyclestreets.org/" title="About CycleStreets">About us</a></li>
+		</ul>
+	</div>
+	
+	<main>
+		
+		<!-- Password box anchor -->
+		<div id="home">
+			<h1>Mapping modal filters and LTNs</h1>
+			<p><strong><a href="https://www.cyclestreets.org/news/2021/07/25/mapping-ltns/">Read about this work on our blog.</a></strong></p>
+		</div>
+		
+		<form id="data">
+		
+			<nav>
+				
+				<div id="selector">
+					<ul>
+						<li class="modalfilters">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_modalfilters" />
+							<a href="#modalfilters" title="Modal filters" class="tooltip"><img src="/images/icons/closure_good.svg" alt="" /><br />Modal filters</a>
+						</li>
+						<li class="ltns">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_ltns" />
+							<a href="#ltns" title="LTNs" class="tooltip"><img src="/images/icons/congestion_neutral.svg" alt="" /><br />LTNs</a>
+						</li>
+						<li class="ltnstatistics">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_ltnstatistics" />
+							<a href="#ltnstatistics" title="LTN statistics" class="tooltip"><img src="/images/icons/signs_bad.svg" alt="" /><br />LTN statistics</a>
+						</li>
+<!--
+						<li class="dublinbikelanes">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_dublinbikelanes" />
+							<a href="#dublinbikelanes" title="Dublin bike lanes" class="tooltip"><img src="/images/icons/bicycles_good.svg" alt="" /><br />Dublin bike lanes</a>
+						</li>
+-->
+<!--
+						<li class="bolton">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_bolton" />
+							<a href="#bolton" title="Bolton data" class="tooltip"><img src="/images/icons/closure_good.svg" alt="" /><br />Bolton data</a>
+						</li>
+-->
+						<li class="osm">
+							<img src="/js/lib/Mapboxgljs.LayerViewer/images/spinner.svg" class="loading" alt="" />
+							<p class="total"></p>
+							<input type="checkbox" name="show[]" id="show_osm" />
+							<a href="#osm" title="OSM data" class="tooltip"><img src="/images/icons/icon_linked_points_neutral.svg" alt="" /><br />OSM data</a>
+						</li>
+					</ul>
+				</div>
+				
+				<div id="sections">
+					
+					<header>
+						<h1>Modal filters and LTNs</h1>
+						<p class="about">Analysing where traffic is being filtered.</p>
+					</header>
+					
+					<div id="modalfilters">
+						<img src="https://www.cyclestreets.net/images/logo/beta.svg" width="48" height="48" style="float: right; top: 20px;" />
+						<h2>Modal filters</h2>
+						<p>Modal filters (or 'point closures') are measures to restrict through-traffic. These facilitate safer streets for cycling and walking, as well as improving residential amenity.</p>
+						<p>You can give feedback on a location, by using the button in the popup, or right-click to add a missing location.</p>
+						<div class="filters">
+							<h4>Show types:</h4>
+							<div class="controls">
+								<select name="type" required="required">
+									<option value="" selected="selected">All</option>
+									<option value="bollard">Bollard</option>
+									<option value="gate">Gate</option>
+									<option value="gap">Gap</option>
+									<option value="cyclewayfilter">Cycleway filter</option>
+									<option value="busgate">Bus gate</option>
+								</select>
+							</div>
+						</div>
+						<p>Various types are shown:</p>
+						<ul>
+							<li>Bollards/gates within a street, that prevent through-traffic but allow walking and cycling</li>
+							<li>Gaps within a street that form a short section of cycleway/walkway, similarly preventing through-traffic</li>
+							<li>Streets abutting main roads but with only a cycleway/pavement between them</li>
+							<li>Bus gates, which allow bus and cycle access to particular areas</li>
+						</ul>
+						<p>For performance reasons, a maximum of 2,000 locations are shown. Zoom in to avoid this limit being hit.</p>
+						<p>The data shown here is the result of automated analysis of OpenStreetMap data, undertaken by CycleStreets.</p>
+						<p>We continue to refine the analysis to remove false-positives and to add additional types.</p>
+					</div>
+					
+					<div id="ltns">
+						<h2>Low-Traffic Neighbourhoods (LTNs)</h2>
+						<img src="https://www.cyclestreets.net/images/logo/beta.svg" width="48" height="48" style="float: right;" />
+						<p>This experimental data shows whether each street is either:</p>
+						<ul>
+							<li>An LTN / no-through traffic</li>
+							<li>A through-route (i.e. rat-running possible)</li>
+							<li>A through-route, but with traffic calming</li>
+						</ul>
+						<p>We treat classified roads (i.e. C roads and bigger) as the roads which divide up areas, as those have historically been considered to intend through-driving, though there are exceptions.</p>
+						<p>The data shown here is the result of automated analysis of OpenStreetMap data, undertaken by CycleStreets.</p>
+						<p>This work is highly experimental at present, with known bugs. We continue to refine the analysis.</p>
+					</div>
+					
+					<div id="ltnstatistics">
+						<h2>Low-Traffic Neighbourhoods (LTN) statistics</h2>
+						<img src="https://www.cyclestreets.net/images/logo/beta.svg" width="48" height="48" style="float: right;" />
+						<p>Statistics by Highway Authority area.</p>
+						<p>This work is highly experimental at present, with known bugs. We continue to refine the analysis.</p>
+						<div class="filters">
+							<h4>Show types:</h4>
+							<div class="controls">
+								<select name="type" required="required">
+									<option value="wards">Wards / Electoral Divisions</option>
+									<option value="districts" selected="selected">District/Unitaries*</option>
+									<option value="highwayauthorities">Highway Authorities</option>
+								</select>
+								<br />
+								<br />
+								<p>* This option also includes London Boroughs and Metropolitan Districts.</p>
+							</div>
+						</div>
+						<div class="export button">
+							<p>Export: <img class="csv" src="/js/lib/Mapboxgljs.LayerViewer/images/page_excel.png" alt="Spreadsheet" /></p>
+						</div>
+
+					</div>
+
+<!--
+					<div id="dublinbikelanes">
+						<h2>Bike lanes in Dublin</h2>
+						<p>This shows Bike lanes in Dublin, which provides context to how modal filters may (or may not) feed into key routes.</p>
+						<p>Data comes from the <a target="_blank" href="https://data.smartdublin.ie/dataset/greater-dublin-area-cycle-lanes-nta">Smart Dublin open data store</a>.</li>
+					</div>
+-->
+<!--
+					<div id="bolton">
+						<h2>Data from Bolton</h2>
+						<p>This shows data from Bolton's <a href="https://www.google.com/maps/d/u/0/viewer?mid=17d6fgYmd-DO6lhSEwnrFf9Z3Zw-Ra_YQ" target="_blank" title="[Link opens in a new window]">map</a>, filtered to those marked as cycle-friendly, for comparison purposes during debugging.</p>
+					</div>
+-->
+					
+					<div id="osm">
+						<h2>OSM data</h2>
+						<p>Raw OSM data. You must be zoomed in very closely for this layer to appear.</p>
+					</div>
+					
+				</div>
+			</nav>
+			
+			<div id="geocoder" class="geocoder">
+				<input type="text" name="location" autocomplete="off" placeholder="Search locations and move map" tabindex="1" spellcheck="false" />
+			</div>
+			
+			<div id="map" class="map">
+			</div>
+			
+		</form>
+		
+	</main>
+	
+	<footer>
+		<p>Created by <a href="https://www.cyclestreets.org/">CycleStreets</a> &nbsp;||&nbsp; <a class="embed" href="#">Embed this map</a> &nbsp;||&nbsp; <a href="https://www.cyclestreets.org/donate/">Donate &#9825;</a> &nbsp;||&nbsp; <a class="feedback" href="https://www.cyclestreets.net/feedback/">Feedback</a> &nbsp;||&nbsp; Uses <a href="https://www.cyclestreets.net/api/">CycleStreets API</a> and other APIs &nbsp;||&nbsp; An open source project - <a href="https://www.github.com/cyclestreets/bikedata/">contribute on Github</a></p>
+	</footer>
+	
+	
+	<!-- In-popup feedback contents -->
+	<div id="popupfeedbackmodalfilters" class="popupfeedback">
+		<h2>Give feedback on this location</h2>
+		<p>Please let us know if this location has been incorrectly determined as a modal filter:</p>
+		<form method="post" action="{%apiBaseUrl}/v2/advocacydata.modalfilters.feedback?key={%apiKey}">
+			<p><label>Comment:<br /><textarea name="notes" rows="5" required="required"></textarea></label></p>
+			<p><label>E-mail (used only if we need to clarify something):<br /><input type="email" name="email" required="required" /></label></p>
+			<p><input type="hidden" name="modification" value="remove" />
+			<p><input type="hidden" name="osmid" data-value="properties.osmId" />
+			<p><input type="hidden" name="modalfilter" data-value="properties.modalfilter" />
+			<p><input type="hidden" name="longitude" data-value="geometry.coordinates.0" />
+			<p><input type="hidden" name="latitude" data-value="geometry.coordinates.1" />
+			<p><input type="submit" /></p>
+		</form>
+	</div>
+	
+	<!-- Location-specification feedback contents -->
+	<div id="locatefeedbackmodalfilters" class="locatefeedback">
+		<h2>Missing modal filter</h2>
+		<p>Please let us know if this location is a modal filter but has been missed out in our analysis:</p>
+		<form method="post" action="{%apiBaseUrl}/v2/advocacydata.modalfilters.feedback?key={%apiKey}">
+			<p>
+				<label>What type of modal filter is missing here?:<br />
+				<select name="modalfilter" required="required">
+					<option value=""></option>
+					<option value="bollard">Bollard</option>
+					<option value="gate">Gate</option>
+					<option value="gap">Gap</option>
+					<option value="cycleway filter">Cycleway filter</option>
+					<option value="bus gate">Bus gate</option>
+				</select>
+				</label>
+			</p>
+			<p><label>Comment:<br /><textarea name="notes" rows="5" required="required"></textarea></label></p>
+			<p><label>E-mail (used only if we need to clarify something):<br /><input type="email" name="email" required="required" /></label></p>
+			<p><input type="hidden" name="modification" value="add" />
+			<p><input type="hidden" name="longitude" />
+			<p><input type="hidden" name="latitude" />
+			<p><input type="submit" /></p>
+		</form>
+	</div>
+	
+	
+	<!-- General feedback form -->
+	<div id="feedback">
+		
+		<h2>Give feedback</h2>
+		<form method="post" id="feedbackform" name="feedbackform" action="https://www.cyclestreets.net/feedback/" enctype="application/x-www-form-urlencoded" accept-charset="UTF-8">
+			<table>
+				<tr>
+					<td colspan="2">
+						<p>We welcome your feedback!</p>
+					</td>
+				</tr>
+				<tr>
+					<td>Comments:</td>
+					<td><textarea name="comments" cols="60" rows="5" required="required"></textarea></td>
+				</tr>
+				<tr>
+					<td>Your name:</td>
+					<td><input type="text" name="name" size="40" maxlength="255" required="required" /></td>
+				</tr>
+				<tr>
+					<td>E-mail:</td>
+					<td><input type="email" name="email" size="40" maxlength="255" required="required" /></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><input type="submit" value="Submit!" class="button" /></td>
+				</tr>
+			</table>
+			<input type="hidden" name="type" value="other" />
+		</form>
+		
+	</div>
+	
+</body>
+
+</html>
+

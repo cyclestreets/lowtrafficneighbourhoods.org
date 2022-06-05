@@ -1,0 +1,11 @@
+{
+  "name": "lowtrafficneighbourhoods.org",
+  "version": "1.0.0",
+  "description": "Low Traffic Neighbourhoods website",
+  "repository": "https://github.com/cyclestreets/lowtrafficneighbourhoods.org/",
+  "author": "CycleStreets Ltd",
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "Mapboxgljs.LayerViewer": "https://github.com/cyclestreets/Mapboxgljs.LayerViewer/"
+  }
+}

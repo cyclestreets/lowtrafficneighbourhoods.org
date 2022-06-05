@@ -1,0 +1,122 @@
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<title>Low-Traffic Neighbourhoods (LTNs) and modal filters map</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, maximum-scale=1, initial-scale=1.0" />
+	
+	<style>
+		
+		@font-face {
+		  font-family: 'Raleway';
+		  font-style: normal;
+		  font-weight: 400;
+		  src: local('Raleway'), local('Raleway-Regular'), url(//fonts.gstatic.com/s/raleway/v11/bIcY3_3JNqUVRAQQRNVteQ.ttf) format('truetype');
+		}
+		@font-face {
+		  font-family: 'Raleway';
+		  font-style: normal;
+		  font-weight: 700;
+		  src: local('Raleway Bold'), local('Raleway-Bold'), url(//fonts.gstatic.com/s/raleway/v11/JbtMzqLaYbbbCL9X6EvaIy3USBnSvpkopQaUR-2r7iU.ttf) format('truetype');
+		}
+		@font-face {
+		  font-family: 'Raleway';
+		  font-style: italic;
+		  font-weight: 400;
+		  src: local('Raleway Italic'), local('Raleway-Italic'), url(//fonts.gstatic.com/s/raleway/v11/IIm-lPOtfVKQy0GMiczF_6CWcynf_cDxXwCLxiixG1c.ttf) format('truetype');
+		}
+		@font-face {
+		  font-family: 'Raleway';
+		  font-style: italic;
+		  font-weight: 700;
+		  src: local('Raleway Bold Italic'), local('Raleway-BoldItalic'), url(//fonts.gstatic.com/s/raleway/v11/lFxvRPuGFG5ktd7P0WRwKonF5uFdDttMLvmWuJdhhgs.ttf) format('truetype');
+		}
+		
+		/* Layout */
+		body {max-width: 800px; margin: 0 auto;}
+		footer {margin-top: 3em; border-top: 1px solid gray; margin-bottom: 3em;}
+		@media only screen and (min-width: 320px) and (max-width: 768px) {
+			body {max-width: auto; margin: 0 20px;}
+		}
+		
+		/* Typography */
+		body {font-family: 'Raleway', Arial, Helvetica, sans-serif; font-size: 1em; line-height: 1.6em;}
+		h1 {margin: 3em 0 1em; line-height: 1.4em;}
+		h2 {margin-top: 2em;}
+		a {color: #333;}
+		
+		/* Map link */
+		p#maplink {text-align: right;}
+		p#maplink a {text-decoration: none; display: block; padding: 4px 20px; width: 8em; border: 1px solid #ddd; border-radius: 10px; background-color: #f7f7f7;}
+		p#maplink a:hover {background-color: #eee;}
+		
+	</style>
+
+</head>
+
+<body>
+
+
+<main>
+
+<h1>Mapping Low-Traffic Neighbourhoods (LTNs) and modal filters</h1>
+
+<p id="maplink"><a href="/map/">Go to the <br />beta map &raquo;</a></p>
+
+
+<p>Modal filters – measures such as bollards, gates, cycle contraflows, etc., are important ways to prevent through-traffic from using residential areas. They help ensure that motor vehicles are used for access only. They have been much in the news recently, but are in fact very common, and have been in existence since at least the 1980s.</p>
+<p>However, until now there has been no national mapping data on where they are. It turns they are in fact extremely common, found in pretty-much every town or city. They are not a &#8216;radical&#8217; or new measure. We set out to prove this, and for the first time, have mapped them.</p>
+<p>We have analysed street data to determine the locations of modal filters across the UK, as well as which streets are through-streets (i.e. capable of having through-traffic from one main road to another).</p>
+<p>The resulting mapping will be helpful for anyone (e.g. citizens, councillors and council officials) trying to introduce new Low-Traffic Neighbourhoods (LTNs) - as it proves how common and widespread these measures are. It will show where further work by local councils is needed. The data on streets will also enable new research to be undertaken on the socio-demographic effects of LTNs, for instance, whether they disproportionately benefit or affect particular groups.</p>
+<p><a href="https://www.cyclestreets.net/location/172469/"><img class="alignnone" src="https://www.cyclestreets.net/location/172469/cyclestreets172469-size350.jpg" alt="" width="350" height="263" /></a>  <a href="https://www.cyclestreets.net/location/150705/"><img loading="lazy" class="alignnone" src="https://www.cyclestreets.net/location/150705/cyclestreets150705-size350.jpg" alt="" width="350" height="263" /></a><br />
+<a href="https://www.cyclestreets.net/location/150487/"><img loading="lazy" class="alignnone" src="https://www.cyclestreets.net/location/150487/cyclestreets150487-size350.jpg" alt="" width="350" height="263" /></a>  <a href="https://www.cyclestreets.net/location/67810/"><img loading="lazy" class="alignnone" src="https://www.cyclestreets.net/location/67810/cyclestreets67810-size350.jpg" alt="" width="350" height="233" /></a><br />
+<em>Modal filters of various types &#8211; (1) Bollards, or planters/gates/gaps, (2) Continuations, (3) Bus gates, (4) No entry except cycles.</em></p>
+<h2>1. Mapping modal filters</h2>
+<p>We have undertaken complex analysis of OpenStreetMap to determine the locations of modal filters. By analysing street patterns, to create a map of where modal filters are located, we aim to show these are entirely normal and widespread.</p>
+<p>There is no widespread map data in the UK that ever states &#8220;Here is a modal filter&#8221;. Instead, maps only state the physical attributes of a street, e.g. a residential street with bollards at one point. However, bollards and gates can also exist in a context which has nothing to do with modal filters.</p>
+<p>As such, a dataset of modal filters can only be obtained by running complex algorithm analysis to spot the typical street patterns which create the concept of a modal filter. This is what we now have done.</p>
+<p>Each of the modal filter types shown in the above example pictures are represented, and you can see below an example from Cambridge.</p>
+<p>You can read the technical details, and gain access to the password-protected beta analysis, via this <a href="https://lists.openstreetmap.org/pipermail/talk-gb/2021-June/027185.html">mailing list posting</a> on the OpenStreetMap talk-gb mailing list. The analysis is quite complex and is not yet perfect.</p>
+<p>We welcome feedback on this beta mapping. At present we estimate we so far have achieved around 80-90% accuracy. You can right-click to flag up a missed location, or click on an existing location to report that it should not be a modal filter. We will review these, to enable us to fix up any systematic shortcomings in our analysis, or whitelist unusual street layout locations that our automated analysis is otherwise unlikely to detect.</p>
+<p><a href="/map/modalfilters/#14.18/52.20248/0.13516"><img loading="lazy" class="alignnone wp-image-1572915 size-full" src="https://www.cyclestreets.org/wp-content/uploads/cambridgemodalfilters.png" alt="" width="857" height="604" /></a></p>
+<p>An early iteration of this work resulted in <a href="https://www.theguardian.com/environment/2021/may/16/critics-of-uk-low-traffic-schemes-told-that-25000-filters-already-existed">coverage in the Guardian</a>. We have since gone on to refine the analysis further.</p>
+<p>We plan to collaborate with an academic colleague in London to produce a peer-reviewed paper on this new research.</p>
+<h2>2. Mapping through-streets</h2>
+<p>We also determine whether every local street (residential/unclassified) can be potentially used for through-traffic (‘rat-running’) or not from one main road to another.</p>
+<p>This is not a map of whether rat-running is actually happening, since there exists no published data on that. It is a map of whether a street is physically capable of seeing through-traffic.</p>
+<ul>
+<li>Blueish-green shows where rat-running is not possible, due to modal filters or dead-ends;</li>
+<li>Red shows where through-traffic is possible;</li>
+<li>Brown shows where through-traffic is possible but there are also traffic-calming measures in place to deter it.</li>
+</ul>
+<p>In technical terms, this is actually a completely separate analysis to the modal filters work, and involves the use of car routing -based testing between identified main roads, and the use of some heuristics to eliminate unlikely situations. This work is at a slightly earlier stage of maturity but will continue to improve, and we are already getting pretty good results.</p>
+<p><a href="/map/ltns/#14.51/52.20321/0.13774"><img loading="lazy" class="alignnone wp-image-1572916 size-full" src="https://www.cyclestreets.org/wp-content/uploads/cambridgeltnstreets.png" alt="" width="856" height="603" srcset="https://www.cyclestreets.org/wp-content/uploads/cambridgeltnstreets.png 856w, https://www.cyclestreets.org/wp-content/uploads/cambridgeltnstreets-300x211.png 300w, https://www.cyclestreets.org/wp-content/uploads/cambridgeltnstreets-150x106.png 150w, https://www.cyclestreets.org/wp-content/uploads/cambridgeltnstreets-768x541.png 768w" sizes="(max-width: 856px) 100vw, 856px" /></a><br />
+<em>Streets in terraced areas of Cambridge often prevent through-traffic, as there are modal filters to stop it physically, or traffic-calming has been installed to deter it.</em></p>
+<p>We treat the dividing roads between areas as C roads and above, because those are classified roads that historically have been considered to permit through-driving. There are of course exceptions around the UK where modal filters have been campaigned for on C roads, which we are not making a judgement on.</p>
+<p>We will similarly shortly be publishing a blog post giving fuller technical details of the analysis.</p>
+<h2>Watch our talk</h2>
+<p>We <a href="https://www.youtube.com/watch?v=LwmlR-0lypU&amp;t=2737s&amp;ab_channel=briandeegan">gave a talk</a> on both of these new datasets in July 2021, to a regular meeting of active travel professionals and advocates from around the UK, organised by Brian Deegan.</p>
+<p><a href="https://www.youtube.com/watch?v=LwmlR-0lypU&amp;t=2737s&amp;ab_channel=briandeegan"><img loading="lazy" class="alignnone wp-image-1572917 size-full" src="https://www.cyclestreets.org/wp-content/uploads/ltnsintroduction.png" alt="" width="638" height="356" srcset="https://www.cyclestreets.org/wp-content/uploads/ltnsintroduction.png 638w, https://www.cyclestreets.org/wp-content/uploads/ltnsintroduction-300x167.png 300w, https://www.cyclestreets.org/wp-content/uploads/ltnsintroduction-150x84.png 150w" sizes="(max-width: 638px) 100vw, 638px" /></a></p>
+<h2>Some background: What&#8217;s changed on local streets over the last decade?</h2>
+<p>This remarkable chart, using the <a href="https://roadtraffic.dft.gov.uk/regions/6">official data from London</a> demonstrates the remarkable change in use of residential streets since 2009.</p>
+<p>That <a href="https://www.theguardian.com/world/2020/sep/25/rat-running-residential-uk-streets-satnav-apps">date correlates with</a> the growth of mobile phones with free satnav apps for drivers. Deliveries have also risen since, as a result of online ordering.</p>
+<p><a href="https://roadtraffic.dft.gov.uk/regions/6"><img loading="lazy" class="alignnone wp-image-1572912 size-full" src="https://www.cyclestreets.org/wp-content/uploads/trafficgrowth.png" alt="" width="705" height="488" border="1" srcset="https://www.cyclestreets.org/wp-content/uploads/trafficgrowth.png 705w, https://www.cyclestreets.org/wp-content/uploads/trafficgrowth-300x208.png 300w, https://www.cyclestreets.org/wp-content/uploads/trafficgrowth-150x104.png 150w" sizes="(max-width: 705px) 100vw, 705px" /></a></p>
+<h2>Acknowledgements</h2>
+<p>Our research on modal filters and through-streets has been made possible thanks to a grant from the <a href="https://www.reesjeffreys.co.uk/">Rees Jeffreys Road Fund</a>. We are most grateful to the Trustees of the Fund for their choosing to fund this work.</p>
+<p><a href="https://www.reesjeffreys.co.uk/"><img loading="lazy" class="alignnone size-full wp-image-1572918" src="https://www.cyclestreets.org/wp-content/uploads/reesjeffreys-1.png" alt="" width="260" height="90" srcset="https://www.cyclestreets.org/wp-content/uploads/reesjeffreys-1.png 260w, https://www.cyclestreets.org/wp-content/uploads/reesjeffreys-1-150x52.png 150w" sizes="(max-width: 260px) 100vw, 260px" /></a></p>
+<p>The work was initially commenced thanks also to a small amount of funding from <a href="https://www.bikeisbest.com/">#BikeIsBest</a>, for whom we undertook initial analysis.</p>
+
+
+</main>
+
+
+<footer>
+	<p>Created by <a href="https://www.cyclestreets.org/">CycleStreets</a>, a not-for-profit social enterprise.</p>
+</footer>
+
+
+</body>
+
+</html>

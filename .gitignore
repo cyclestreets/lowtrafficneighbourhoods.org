@@ -1,0 +1,6 @@
+.config.js
+
+# Dependencies installed with Yarn
+/js/lib/
+/yarn-error.log
+
